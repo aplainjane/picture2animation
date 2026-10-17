@@ -12,7 +12,16 @@ AI 拆图、补图、做动画，你在网页里检查和调整。
 
 [制作流程](#制作流程) · [快速开始](#快速开始) · [Skill 文档](character-rig-design/SKILL.md) · [动作示例](character-rig-design/references/dafeiyu-motion-example.md)
 
-<img src="docs/media/dafeiyu-idle-run.gif" width="480" alt="大肥鱼的实际动画：待机、起跑、跑步、收步后回到待机">
+<table>
+  <tr>
+    <th align="center">原图</th>
+    <th align="center">动画</th>
+  </tr>
+  <tr>
+    <td align="center" width="50%"><img src="docs/media/dafeiyu-original.jpg" width="300" alt="大肥鱼原图"></td>
+    <td align="center" width="50%"><img src="docs/media/dafeiyu-idle-run.gif" width="360" alt="大肥鱼的实际动画：待机、起跑、跑步、收步后回到待机"></td>
+  </tr>
+</table>
 
 *出镜：大肥鱼。待机、起跑、跑步、收步，录自实际动画页面。*
 

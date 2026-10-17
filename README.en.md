@@ -12,7 +12,16 @@ AI prepares the cutouts, repairs, and animation. Review and edit each step in yo
 
 [Workflow](#workflow) · [Quick start](#quick-start) · [Skill docs](character-rig-design/SKILL.md) · [Motion example](character-rig-design/references/dafeiyu-motion-example.md)
 
-<img src="docs/media/dafeiyu-idle-run.gif" width="480" alt="Dafeiyu in the actual cutout player: idle, start running, run, stop, and return to idle">
+<table>
+  <tr>
+    <th align="center">Original</th>
+    <th align="center">Animation</th>
+  </tr>
+  <tr>
+    <td align="center" width="50%"><img src="docs/media/dafeiyu-original.jpg" width="300" alt="Original Dafeiyu illustration"></td>
+    <td align="center" width="50%"><img src="docs/media/dafeiyu-idle-run.gif" width="360" alt="Dafeiyu in the actual cutout player: idle, start running, run, stop, and return to idle"></td>
+  </tr>
+</table>
 
 *Featuring Dafeiyu. Idle, start, run, and stop, recorded from the actual player.*
 
