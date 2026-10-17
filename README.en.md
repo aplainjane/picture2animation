@@ -194,6 +194,38 @@ The current renderer uses single-bone rigid cutouts and local strip deformation.
 - [Dafeiyu motion example](character-rig-design/references/dafeiyu-motion-example.md): four clips, live transitions, and the small stop gesture.
 - [Motion JSON](character-rig-design/assets/examples/dafeiyu/motion.json): image-free data for studying individual node tracks.
 
-[Issues](https://github.com/aplainjane/picture2animation/issues) are welcome. Include a screenshot, the part name, and the point in the animation where things go wrong. “Left elbow seam at 0.2 seconds in run” is much easier to track down than “the running looks off.” Suggestions for better cutout and binding workflows are welcome too.
+There is still plenty to improve in this workflow. If a stage guide is unclear, an editing tool is awkward, a handoff loses your changes, or the process is hard to reuse with another illustration, please open an [Issue](https://github.com/aplainjane/picture2animation/issues). Tell me which stage you reached, what you expected to do, and where you got stuck. Suggestions, alternative workflows, and PRs are welcome too.
 
-<sub>Screenshots and animation come from the included Dafeiyu example. The project icon was supplied by the project author. Inclusion of an example does not grant rights to reuse the underlying character or artwork.</sub>
+## Manual editing examples
+
+I also made some of Dafeiyu's final adjustments by hand. These comparisons show the materials entering the final stage and the edits I saved in the animation page, using the same coordinates and scale on both sides.
+
+![Actual saved manual edits: before and after the torso hem, skirt edge, and thigh joint adjustments](docs/media/06-manual-edits.jpg)
+
+You can make these local adjustments in the stage 06 editor:
+
+| Area | How to edit it |
+| --- | --- |
+| Torso hem | Pick an existing dark clothing color and paint along the lower edge, leaving some overlap for areas exposed during motion. |
+| Skirt edge | Erase stray pixels. If pixels belong to the leg, use the two-layer transfer tool to move them to that layer. |
+| Thigh joint | Pick a nearby skin color and fill the joint area with a small brush. Check the overlap during crouching and stepping, then clean the edge with the eraser. |
+
+1. Pause on the pose you want to adjust. Click a part and double-click to open the editor, or select it in the layer list and click “手修选中素材” (edit selected material).
+2. Use the color picker, brush, and eraser for touch-ups. To redistribute pixels, click “点选两块” (pick two parts), select both layers, and click “编辑这两层” (edit these layers).
+3. In the two-layer editor, cyan marks A and orange marks B. Choose the active layer, then brush along the boundary with “扩大当前层” (expand current layer) or “划给另一层” (give to the other layer). The animation preview updates alongside it.
+4. Click “保存素材” (save materials), check the animation, and export again. Unsaved brush strokes stay local and are not submitted to the project.
+
+The offline example is for playback and review. Use the stage 06 editing page to save material changes. See [final-page layer and material editing](character-rig-design/stages/06-motion-production.md#最终页图层与素材微调) for the save rules.
+
+## Personal notes
+
+> **Note:** In my experience so far, **GPT-6.1-sol** is sufficient for part separation and skeleton binding. For animation generation, I would suggest **Claude Opus 5.5**; I tend to get more natural motion from it. GPT's understanding and sequencing of movement sometimes still feel a little off to me. This is my personal experience, offered as a reference.
+
+## Disclaimer
+
+This is my personal character-animation experiment, shared to document the workflow, tools, and what I learned along the way.
+
+- **Artwork:** Character images, cutouts, animations, screenshots, and icons in this repository demonstrate the workflow. I claim no rights to any third-party characters, original illustrations, or other artwork included in them; those rights remain with their respective holders. Displaying these materials here does not grant permission to repost, redistribute, or use them commercially.
+- **Your use:** Before processing images, publishing results, or using them commercially, check the permissions for the source images, characters, and related assets, and follow the terms of the models and services you use. I cannot obtain those permissions on your behalf or warrant that a particular use is authorized.
+- **Results:** The tools and AI outputs are provided as is and may contain separation, repair, binding, or animation errors. Keep backups of source images and projects, and review the final results yourself. To the extent permitted by applicable law, I am not liable for data loss, rights disputes, or other losses arising from use of this project.
+- **Rights concerns:** If you are a rights holder and have concerns about content displayed or included here, please open an [Issue](https://github.com/aplainjane/picture2animation/issues) identifying the content and explaining your rights. I will review it and address it promptly, including adding attribution, replacing, or removing the material as appropriate.
