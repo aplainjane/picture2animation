@@ -1,0 +1,3 @@
+# Keep the frozen example byte-for-byte so its published SHA-256 values hold.
+character-rig-design/assets/examples/dafeiyu/index.html -text
+character-rig-design/assets/examples/dafeiyu/motion.json -text

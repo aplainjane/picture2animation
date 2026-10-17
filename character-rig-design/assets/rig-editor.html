@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>角色结构 · 骨骼标注台</title>
+<style>
+:root{font-family:Inter,"Segoe UI","Microsoft YaHei",sans-serif;color:#263630;background:#f3f5f2;font-size:13px;--green:#236b56;--line:#dce3dc;--muted:#738077}*{box-sizing:border-box}body{margin:0}button,input,select,textarea{font:inherit}button{cursor:pointer;border:1px solid var(--line);border-radius:7px;background:white;color:inherit;padding:8px 11px}button:hover{background:#edf3ed}button:disabled{opacity:.4;cursor:default}.primary{background:var(--green);color:white;border-color:var(--green)}.primary:hover{background:#195540}button.active{background:#dceee4;border-color:#629c7d;color:#225b43}header{min-height:76px;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;gap:14px;background:white;border-bottom:1px solid var(--line)}h1{font-size:18px;letter-spacing:.03em;margin:0 0 5px}h1 small{font-size:11px;color:var(--green);letter-spacing:.12em;margin-right:12px}.subtitle{font-size:12px;color:var(--muted)}.actions,.tools{display:flex;gap:7px;align-items:center;flex-wrap:wrap}.workspace{display:grid;grid-template-columns:230px minmax(320px,1fr) 270px;height:calc(100dvh - 117px);min-height:510px}.panel{background:#fcfdfb;overflow:auto;padding:19px 16px}.left{border-right:1px solid var(--line)}.right{border-left:1px solid var(--line)}.eyebrow{text-transform:uppercase;letter-spacing:.13em;color:var(--muted);font-size:10px;font-weight:700}.section-title{display:flex;justify-content:space-between;align-items:center;margin:0 0 16px;font-weight:650}.badge{background:#e7eee7;color:#58735e;border-radius:20px;padding:3px 8px;font-size:11px}.node-row{width:100%;text-align:left;display:flex;align-items:center;gap:9px;border-color:transparent;background:transparent;margin:3px 0;padding:9px 8px}.node-row.selected{background:#e1eee5;border-color:#a1bfa9}.node-row .label{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis}.node-row small{display:block;font-size:10px;color:var(--muted);margin-top:3px}.dot{width:8px;height:8px;border-radius:50%;background:#df9d3b;flex-shrink:0}.dot.confirmed{background:#2c8875}.dot.adjusted{background:#4e80bf}.left-note{border-top:1px solid var(--line);margin-top:20px;padding-top:16px;font-size:12px;line-height:1.8;color:var(--muted)}.left-note b{color:#425a4a}.center{min-width:0;display:flex;flex-direction:column;overflow:hidden}.toolbar{padding:12px 15px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;background:#f7f9f5}.tools button{padding:6px 10px}.zoom-label{font-size:11px;min-width:39px;text-align:center;font-variant-numeric:tabular-nums}#viewport{position:relative;flex:1;min-height:320px;overflow:hidden;touch-action:none;background-color:#e7ebe5;background-image:linear-gradient(45deg,#dfe5dc 25%,transparent 25%),linear-gradient(-45deg,#dfe5dc 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#dfe5dc 75%),linear-gradient(-45deg,transparent 75%,#dfe5dc 75%);background-size:24px 24px;background-position:0 0,0 12px,12px -12px,-12px 0}#viewport.add-mode{cursor:crosshair}#canvas{width:100%;height:100%;position:absolute;inset:0;user-select:none}#empty{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:30px;color:#5f7062;pointer-events:none}#empty b{display:block;font-size:22px;color:#3c5845;margin-bottom:12px}.canvas-footer{padding:11px 16px;font-size:11px;color:var(--muted);background:#f9faf7;display:flex;justify-content:space-between;gap:8px;border-top:1px solid var(--line)}#projectNote{padding:10px 15px;background:#fff5dc;border-bottom:1px solid #eee0ba;color:#806334;font-size:12px;line-height:1.6}label.field{display:block;font-size:11px;color:#66766b;margin-bottom:13px}label.field input,label.field select,label.field textarea{display:block;width:100%;margin-top:6px;border:1px solid #d7e0d7;background:white;border-radius:6px;padding:8px;color:#263630}textarea{resize:vertical;min-height:64px}.pair{display:grid;grid-template-columns:1fr 1fr;gap:10px}.muted{color:var(--muted);font-size:12px;line-height:1.8}.right button{width:100%;margin:4px 0}.danger{color:#ac4a43;margin-top:16px!important}#imageInfo{padding-top:17px;margin-top:20px;border-top:1px solid var(--line);font-size:11px;color:var(--muted);line-height:1.8}footer{height:41px;padding:10px 24px;border-top:1px solid var(--line);background:white;color:#6f7d72;font-size:11px;display:flex;justify-content:space-between;gap:12px}#status{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}svg text{paint-order:stroke;stroke:rgba(250,253,248,.94);stroke-linejoin:round;stroke-width:3px;fill:#244d3c;pointer-events:none}svg .handle{cursor:grab}svg .handle:active{cursor:grabbing}input:focus,select:focus,textarea:focus,button:focus-visible{outline:2px solid #65a086;outline-offset:2px}[hidden]{display:none!important}@media(max-width:1050px){header{padding:13px 16px;align-items:flex-start}.workspace{grid-template-columns:185px minmax(280px,1fr) 235px}.panel{padding:15px 12px}.actions{max-width:430px;justify-content:flex-end}h1 small{display:block;margin-bottom:5px}}@media(max-width:760px){header{flex-direction:column}.actions{max-width:none;justify-content:flex-start}.workspace{height:auto;grid-template-columns:1fr 1fr;min-height:0}.center{grid-column:1/-1;grid-row:1;height:65dvh}.left,.right{max-height:430px;border-top:1px solid var(--line)}.left{border-right:1px solid var(--line)}.right{border-left:0}footer{height:auto;min-height:41px;padding:10px 12px}}
+</style>
+<style>
+.checkpoint-bar{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:10px 24px;min-height:58px;background:#edf5ef;border-bottom:1px solid #cbded0}.checkpoint-bar p{margin:0;font-size:12px;line-height:1.6;color:#526a59}.checkpoint-bar strong{color:#286347}.checkpoint-bar.error{background:#fff1e9}.checkpoint-bar.error strong{color:#ad5032}body.has-checkpoint-bar .workspace{height:calc(100dvh - 175px)}@media(max-width:760px){.checkpoint-bar{padding:10px 15px;align-items:flex-start;flex-direction:column}body.has-checkpoint-bar .workspace{height:auto}}
+</style>
+</head>
+<body>
+<header><div><h1><small>CHARACTER LAB / 01</small>角色结构 · 骨骼标注台</h1><div class="subtitle" id="projectTitle">从原画开始，让每个支点都准确。</div></div><div class="actions"><button id="openImage">打开图片</button><button id="import">导入 JSON</button><button id="export">导出 JSON</button><button class="primary" id="savePage">保存当前网页</button></div></header>
+<div class="checkpoint-bar" id="checkpointBar"><p><strong id="checkpointState">检查点未连接</strong><br><span id="checkpointDetail">通过 skill 启动本地预览后，可直接提交人工确认。</span></p><button class="primary" id="confirmStage" disabled>确认设计并进入下一步</button></div>
+<input type="file" id="imageFile" accept="image/png,image/jpeg,image/webp,image/gif,image/bmp,image/avif" hidden><input type="file" id="jsonFile" accept=".json,application/json" hidden>
+<main class="workspace">
+<aside class="panel left"><div class="section-title"><span>骨骼节点</span><span class="badge" id="count">0</span></div><div id="nodeList"></div><div class="left-note"><b>节点状态</b><br>🟠 建议位置　🔵 已调整<br>🟢 设计者已确认<br><br>虚线表示端点含推测定位。<br>拖动只移动当前节点，子节点保持原位。<br><br><b>操作</b><br>拖动节点调整 · 空白处拖动画布<br>滚轮缩放 · 方向键微调 1 px<br>Shift + 方向键微调 10 px</div></aside>
+<section class="center"><div class="toolbar"><div class="tools"><button id="selectMode" class="active">选择 / 移动</button><button id="addMode">＋ 添加节点</button><button id="undo" title="Ctrl / ⌘ + Z">撤销</button><button id="redo" title="Ctrl / ⌘ + Shift + Z">重做</button></div><div class="tools"><button id="zoomOut" aria-label="缩小">−</button><span class="zoom-label" id="zoom">100%</span><button id="zoomIn" aria-label="放大">＋</button><button id="fit">适应画布</button><button id="labels" class="active">名称</button><button id="bones" class="active">连线</button></div></div><div id="projectNote" hidden></div><div id="viewport"><svg id="canvas" aria-label="角色原图和可调整的骨骼节点"></svg><div id="empty"><div><b>放入你的角色原画</b>打开图片后，点击「添加节点」开始标注。<br>AI 生成的预定位节点可通过 JSON 或此网页载入。</div></div></div><div class="canvas-footer"><span id="dimensions">尚未载入图片</span><span>原图像素坐标 · 左上角为原点</span></div></section>
+<aside class="panel right"><div class="section-title">节点属性</div><div id="noSelection" class="muted">点击节点查看属性。<br>也可以添加任意自定义节点。</div><div id="inspector" hidden><label class="field">稳定 ID<input id="nodeId" spellcheck="false"></label><label class="field">名称<input id="nodeLabel"></label><div class="pair"><label class="field">X / px<input id="nodeX" type="number" min="0" step="0.1"></label><label class="field">Y / px<input id="nodeY" type="number" min="0" step="0.1"></label></div><label class="field">父节点<select id="nodeParent"></select></label><div class="pair"><label class="field">节点类型<select id="nodeType"><option value="joint">身体关节</option><option value="anchor">部件锚点</option><option value="control">变形控制点</option></select></label><label class="field">定位依据<select id="nodePlacement"><option value="visible">可见定位</option><option value="inferred">遮挡推测</option></select></label></div><label class="field">关联部件 ID（逗号分隔）<input id="nodeParts"></label><label class="field">定位说明<textarea id="nodeNote"></textarea></label><p class="muted" id="reviewLabel"></p><button class="primary" id="confirm">确认当前节点</button><button class="danger" id="delete">删除节点</button><p class="muted">删除节点后，直接子节点将接到其父节点，位置保持不变。</p></div><div id="imageInfo"></div></aside>
+</main><footer><span id="status" role="status" aria-live="polite">就绪</span><span>图片在本地处理 · 关闭前请保存</span></footer>
+<script id="rig-data" type="application/json">{"schema_version":1,"title":"未命名角色","image":null,"coordinate_system":{"origin":"top-left","units":"px","x":"right","y":"down"},"nodes":[],"parts":[]}</script>
+<script id="checkpoint-config" type="application/json">null</script>
+<script>
+'use strict';
+(() => {
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const REVIEW={proposed:'建议位置',adjusted:'已调整',confirmed:'设计者已确认'};
+const TYPE=['joint','anchor','control'], PLACEMENT=['visible','inferred'];
+const clone=o=>JSON.parse(JSON.stringify(o)), round=v=>Math.round(v*10)/10;
+let data=validate(JSON.parse($('rig-data').textContent)), selected=null, mode='select', scale=1, pan={x:0,y:0}, showLabels=true, showBones=true, gesture=null, dirty=false, undoStack=[], redoStack=[], fitView=true, lastViewportSize=null;
+const viewport=$('viewport');
+const checkpointConfig=JSON.parse($('checkpoint-config').textContent);
+let serverRevision=checkpointConfig?.revision??0, checkpointState=checkpointConfig?.status||'offline', syncPending=0, syncError='', requestQueue=Promise.resolve(), editVersion=0;
+document.body.classList.add('has-checkpoint-bar');
+function renderCheckpoint(){
+ const offline=!checkpointConfig;
+ $('checkpointState').textContent=offline?'检查点未连接':syncError?'未能保存，请重新连接':syncPending?'正在保存设计…':checkpointState==='confirmed'?'本阶段已确认':'等待人工确认';
+ $('checkpointDetail').textContent=offline?'当前为独立网页；普通保存不会确认阶段。请通过 skill 启动本地预览。':syncError?syncError:syncPending?'请等待保存完成，再确认进入下一步。':checkpointState==='confirmed'?'确认文件已写入项目，等待流程读取；再次修改需要重新确认。':'调整会自动保存为草稿。满意后点击右侧按钮，生成本次设计的确认文件。';
+ $('checkpointBar').classList.toggle('error',!!syncError);
+ $('confirmStage').disabled=offline||!data.image||!data.nodes.length||syncPending>0||!!syncError||checkpointState==='confirmed';
+ $('confirmStage').textContent=checkpointState==='confirmed'?'已确认':'确认设计并进入下一步';
+ $('openImage').disabled=!offline;
+ $('openImage').title=offline?'打开角色原画':'更换原画请由 skill 新建一次审阅，避免混用旧确认。';
+ document.querySelector('footer span:last-child').textContent=offline?'图片在本地处理 · 关闭前请保存':'草稿自动保存 · 阶段需人工确认';
+}
+function queueRequest(endpoint,design){
+ if(!checkpointConfig)return Promise.resolve(null);
+ syncPending++;renderCheckpoint();
+ const task=requestQueue.then(async()=>{
+  const response=await fetch(checkpointConfig.base_url+endpoint,{method:'POST',headers:{'Content-Type':'application/json','X-Review-Token':checkpointConfig.token},body:JSON.stringify({run_id:checkpointConfig.run_id,revision:serverRevision,design})});
+  const result=await response.json();if(!response.ok)throw Error(result.error||'保存失败，请重新打开审阅页面。');
+  serverRevision=result.revision;checkpointState=result.status;syncError='';return result;
+ });
+ requestQueue=task.catch(e=>{syncError=e.message;checkpointState='awaiting_review';}).finally(()=>{syncPending--;if(!syncPending&&!syncError)dirty=false;renderCheckpoint();});
+ return task;
+}
+function designChanged(){editVersion++;dirty=true;if(!checkpointConfig)return;checkpointState='awaiting_review';queueRequest('/api/draft',clone(data)).catch(()=>{});}
+function validate(raw){
+ if(!raw || raw.schema_version!==1 || !Array.isArray(raw.nodes))throw Error('需要 schema_version: 1 和 nodes 数组。');
+ const d=clone(raw);
+ if(d.coordinate_system && (d.coordinate_system.origin!=='top-left'||d.coordinate_system.units!=='px'||d.coordinate_system.x!=='right'||d.coordinate_system.y!=='down'))throw Error('坐标系须为原图像素：左上原点，x 向右，y 向下。');
+ d.coordinate_system={origin:'top-left',units:'px',x:'right',y:'down'};d.parts??=[];
+ if(!Array.isArray(d.parts))throw Error('parts 必须是数组。');
+ if(d.image){if(!Number.isInteger(d.image.width)||d.image.width<=0||!Number.isInteger(d.image.height)||d.image.height<=0)throw Error('图片宽高必须是正整数。');if(!/^data:image\/(png|jpeg|webp|gif|bmp|avif);base64,/i.test(d.image.src||''))throw Error('图片须为内嵌的 PNG / JPEG / WebP 等位图。');}
+ else if(d.nodes.length)throw Error('节点需要对应原图。');
+ const ids=new Set();for(const n of d.nodes){if(typeof n.id!=='string'||!n.id.trim()||ids.has(n.id))throw Error('节点 ID 不能为空或重复。');ids.add(n.id);if(!Number.isFinite(n.x)||!Number.isFinite(n.y)||n.x<0||n.y<0||n.x>d.image.width||n.y>d.image.height)throw Error('节点 '+n.id+' 的坐标超出原图。');n.parent??=null;n.label??=n.id;n.type??='joint';n.placement??='visible';n.review??='proposed';n.parts??=[];n.note??='';if(typeof n.label!=='string'||typeof n.note!=='string'||!Array.isArray(n.parts)||n.parts.some(v=>typeof v!=='string')||!TYPE.includes(n.type)||!PLACEMENT.includes(n.placement)||!Object.hasOwn(REVIEW,n.review))throw Error('节点 '+n.id+' 的属性无效。');}
+ const byId=new Map(d.nodes.map(n=>[n.id,n]));for(const n of d.nodes){let p=n.parent;const seen=new Set([n.id]);while(p!==null){if(!ids.has(p))throw Error('父节点不存在：'+p);if(seen.has(p))throw Error('父子连接不能形成循环。');seen.add(p);p=byId.get(p).parent;}}
+ const partIds=new Set();for(const p of d.parts){if(!p||typeof p.id!=='string'||!p.id.trim()||partIds.has(p.id))throw Error('部件 ID 不能为空或重复。');partIds.add(p.id);if(p.node_ids!==undefined&&(!Array.isArray(p.node_ids)||p.node_ids.some(id=>!ids.has(id))))throw Error('部件 '+p.id+' 引用了不存在的节点。');}
+ // 部件定义可在后续分析中补齐；节点 parts 允许先记录设计者的部件 ID。
+ return d;
+}
+function status(s){$('status').textContent=s;}
+function report(e){status('未应用：'+e.message);}
+function current(){return data.nodes.find(n=>n.id===selected);}
+function snapshot(){return {data:clone(data),selected};}
+function pushHistory(s=snapshot()){undoStack.push(s);if(undoStack.length>80)undoStack.shift();redoStack=[];dirty=true;designChanged();}
+function transact(fn,message){const prev=snapshot();try{fn();data=validate(data);pushHistory(prev);render();status(message||'已修改，请保存。');}catch(e){data=prev.data;selected=prev.selected;render();report(e);}}
+function history(back){const from=back?undoStack:redoStack,to=back?redoStack:undoStack;if(!from.length)return;to.push(snapshot());const s=from.pop();data=s.data;selected=s.selected;dirty=true;designChanged();render();status(back?'已撤销。':'已重做。');}
+function svgEl(tag,attrs,parent){const e=document.createElementNS(NS,tag);for(const [k,v]of Object.entries(attrs))e.setAttribute(k,String(v));parent.appendChild(e);return e;}
+function renderCanvas(){
+ const svg=$('canvas');svg.replaceChildren();$('empty').hidden=!!data.image;
+ $('zoom').textContent=Math.round(scale*100)+'%';
+ if(!data.image)return;
+ const world=svgEl('g',{transform:`translate(${pan.x} ${pan.y}) scale(${scale})`},svg);
+ svgEl('image',{href:data.image.src,width:data.image.width,height:data.image.height,x:0,y:0},world);
+ const byId=new Map(data.nodes.map(n=>[n.id,n]));
+ if(showBones)for(const n of data.nodes){const p=byId.get(n.parent);if(!p)continue;svgEl('line',{x1:p.x,y1:p.y,x2:n.x,y2:n.y,stroke:'#184d3e','stroke-width':5/scale,'stroke-opacity':.25},world);svgEl('line',{x1:p.x,y1:p.y,x2:n.x,y2:n.y,stroke:'#67d4ae','stroke-width':2/scale,'stroke-dasharray':(n.placement==='inferred'||p.placement==='inferred')?`${5/scale} ${4/scale}`:'none'},world);}
+ for(const n of data.nodes){const g=svgEl('g',{'data-node':n.id,class:'handle'},world);if(n.id===selected)svgEl('circle',{cx:n.x,cy:n.y,r:12/scale,fill:'none',stroke:'#ffffff','stroke-width':2/scale},g);svgEl('circle',{cx:n.x,cy:n.y,r:9/scale,fill:'transparent','data-node':n.id},g);svgEl('circle',{cx:n.x,cy:n.y,r:5.5/scale,fill:n.review==='confirmed'?'#238e77':n.review==='adjusted'?'#5591d6':'#efb14f',stroke:'#fff','stroke-width':1.6/scale},g);if(showLabels){const text=svgEl('text',{x:n.x+11/scale,y:n.y-10/scale,'font-size':12/scale,'font-weight':600,'stroke-width':3/scale},g);text.textContent=n.label;}}
+}
+function isDescendant(id,ancestor){let n=data.nodes.find(n=>n.id===id);while(n){if(n.parent===ancestor)return true;n=data.nodes.find(p=>p.id===n.parent);}return false;}
+function renderInspector(){const n=current();$('inspector').hidden=!n;$('noSelection').hidden=!!n;if(!n)return;
+ $('nodeId').value=n.id;$('nodeLabel').value=n.label;$('nodeX').value=round(n.x);$('nodeY').value=round(n.y);$('nodeX').max=data.image.width;$('nodeY').max=data.image.height;
+ const select=$('nodeParent');select.replaceChildren(new Option('无（根节点）',''));
+ for(const p of data.nodes)if(p.id!==n.id&&!isDescendant(p.id,n.id))select.add(new Option(p.label+' · '+p.id,p.id));select.value=n.parent||'';
+ $('nodeType').value=n.type;$('nodePlacement').value=n.placement;$('nodeParts').value=n.parts.join(', ');$('nodeNote').value=n.note;$('reviewLabel').textContent='状态：'+REVIEW[n.review];$('confirm').disabled=n.review==='confirmed';
+}
+function render(){
+ $('projectTitle').textContent=data.title||'未命名角色';$('count').textContent=data.nodes.length;
+ $('projectNote').hidden=!data.note;$('projectNote').textContent=data.note||'';
+ $('nodeList').replaceChildren();for(const n of data.nodes){const row=document.createElement('button');row.className='node-row'+(selected===n.id?' selected':'');row.dataset.id=n.id;const dot=document.createElement('span');dot.className='dot '+n.review;const label=document.createElement('span');label.className='label';label.textContent=n.label;const sub=document.createElement('small');sub.textContent=n.id+(n.placement==='inferred'?' · 推测':'');label.appendChild(sub);row.append(dot,label);row.onclick=()=>{selected=n.id;render();};$('nodeList').appendChild(row);}
+ $('undo').disabled=!undoStack.length;$('redo').disabled=!redoStack.length;$('addMode').disabled=!data.image;
+ $('dimensions').textContent=data.image?`${data.image.width} × ${data.image.height} px`:'尚未载入图片';$('imageInfo').textContent=data.image?`图片：${data.image.name||'原画'} · ${data.image.width} × ${data.image.height} px`:'支持 PNG / JPEG / WebP 等位图。';
+ renderInspector();renderCanvas();renderCheckpoint();
+}
+function fit(){if(!data.image)return;fitView=true;const r=viewport.getBoundingClientRect();scale=Math.max(.005,Math.min((r.width-70)/data.image.width,(r.height-70)/data.image.height));pan={x:(r.width-data.image.width*scale)/2,y:(r.height-data.image.height*scale)/2};renderCanvas();}
+function zoomAt(factor,x,y){if(!data.image)return;fitView=false;const next=Math.min(30,Math.max(.005,scale*factor));pan.x=x-(x-pan.x)*next/scale;pan.y=y-(y-pan.y)*next/scale;scale=next;renderCanvas();}
+function imagePoint(e){const r=viewport.getBoundingClientRect();return {x:(e.clientX-r.left-pan.x)/scale,y:(e.clientY-r.top-pan.y)/scale};}
+function clampPoint(p){return {x:round(Math.max(0,Math.min(data.image.width,p.x))),y:round(Math.max(0,Math.min(data.image.height,p.y)))};}
+function setMode(m){mode=m;$('selectMode').classList.toggle('active',m==='select');$('addMode').classList.toggle('active',m==='add');viewport.classList.toggle('add-mode',m==='add');}
+let spaceDown=false;
+viewport.addEventListener('pointerdown',e=>{
+ if(!data.image||![0,1].includes(e.button))return;e.preventDefault();
+ const id=e.target.closest('[data-node]')?.getAttribute('data-node');
+ if(e.button===1||spaceDown){gesture={kind:'pan',x:e.clientX,y:e.clientY,start:{...pan}};}
+ else if(id){selected=id;render();gesture={kind:'node',id,start:imagePoint(e),origin:{x:current().x,y:current().y},before:snapshot(),moved:false};}
+ else if(mode==='add'){const p=imagePoint(e);if(p.x<0||p.y<0||p.x>data.image.width||p.y>data.image.height)return;transact(()=>{let i=1;while(data.nodes.some(n=>n.id==='node_'+i))i++;const n={id:'node_'+i,label:'新节点 '+i,...clampPoint(p),parent:selected,type:'joint',placement:'visible',review:'adjusted',parts:[],note:''};data.nodes.push(n);selected=n.id;},'已添加节点；可在右侧修改名称与连接。');return;}
+ else{selected=null;render();gesture={kind:'pan',x:e.clientX,y:e.clientY,start:{...pan}};}
+ viewport.setPointerCapture(e.pointerId);
+});
+viewport.addEventListener('pointermove',e=>{if(!gesture)return;if(gesture.kind==='pan'){fitView=false;pan.x=gesture.start.x+e.clientX-gesture.x;pan.y=gesture.start.y+e.clientY-gesture.y;renderCanvas();return;}const p=imagePoint(e),n=current();const next=clampPoint({x:gesture.origin.x+p.x-gesture.start.x,y:gesture.origin.y+p.y-gesture.start.y});if(next.x!==n.x||next.y!==n.y){Object.assign(n,next,{review:'adjusted'});if(!gesture.moved)designChanged();gesture.moved=true;renderCanvas();$('nodeX').value=n.x;$('nodeY').value=n.y;$('reviewLabel').textContent='状态：已调整';}});
+function endGesture(cancel=false){if(!gesture)return;if(gesture.kind==='node'&&gesture.moved){if(cancel){data=gesture.before.data;selected=gesture.before.selected;designChanged();}else{pushHistory(gesture.before);status(checkpointConfig?'节点已调整，正在保存草稿。':'节点位置已调整，请保存。');}}gesture=null;render();}
+viewport.addEventListener('pointerup',()=>endGesture());viewport.addEventListener('pointercancel',()=>endGesture(true));viewport.addEventListener('lostpointercapture',()=>endGesture());
+viewport.addEventListener('wheel',e=>{e.preventDefault();const r=viewport.getBoundingClientRect();zoomAt(Math.exp(-e.deltaY*.0015),e.clientX-r.left,e.clientY-r.top);},{passive:false});
+$('selectMode').onclick=()=>setMode('select');$('addMode').onclick=()=>setMode('add');$('fit').onclick=fit;
+for(const [id,f]of [['zoomIn',1.25],['zoomOut',.8]])$(id).onclick=()=>{const r=viewport.getBoundingClientRect();zoomAt(f,r.width/2,r.height/2);};
+$('labels').onclick=()=>{showLabels=!showLabels;$('labels').classList.toggle('active',showLabels);renderCanvas();};$('bones').onclick=()=>{showBones=!showBones;$('bones').classList.toggle('active',showBones);renderCanvas();};
+$('undo').onclick=()=>history(true);$('redo').onclick=()=>history(false);
+function edit(field,value){transact(()=>{const n=current();n[field]=value;n.review='adjusted';if(field==='parts')for(const p of data.parts){if(Array.isArray(p.node_ids))p.node_ids=p.node_ids.filter(id=>id!==n.id);if(value.includes(p.id)){p.node_ids??=[];p.node_ids.push(n.id);}}});}
+$('nodeId').onchange=e=>transact(()=>{const n=current(),old=n.id,id=e.target.value.trim();if(!id||data.nodes.some(v=>v!==n&&v.id===id))throw Error('ID 不能为空或与现有节点重复。');n.id=id;selected=id;for(const v of data.nodes)if(v.parent===old)v.parent=id;for(const p of data.parts)if(Array.isArray(p.node_ids))p.node_ids=p.node_ids.map(v=>v===old?id:v);n.review='adjusted';});
+$('nodeLabel').onchange=e=>edit('label',e.target.value.trim()||current().id);
+$('nodeX').onchange=e=>{if(!e.target.value.trim()){renderInspector();return report(Error('坐标不能为空。'));}edit('x',Number(e.target.value));};$('nodeY').onchange=e=>{if(!e.target.value.trim()){renderInspector();return report(Error('坐标不能为空。'));}edit('y',Number(e.target.value));};
+$('nodeParent').onchange=e=>edit('parent',e.target.value||null);$('nodeType').onchange=e=>edit('type',e.target.value);$('nodePlacement').onchange=e=>edit('placement',e.target.value);$('nodeParts').onchange=e=>edit('parts',[...new Set(e.target.value.split(/[,，]/).map(s=>s.trim()).filter(Boolean))]);$('nodeNote').onchange=e=>edit('note',e.target.value);
+$('confirm').onclick=()=>transact(()=>{current().review='confirmed';},'当前节点已确认。');
+function deleteNode(){const n=current();if(!n)return;transact(()=>{for(const child of data.nodes)if(child.parent===n.id){child.parent=n.parent;child.review='adjusted';}for(const p of data.parts)if(Array.isArray(p.node_ids))p.node_ids=p.node_ids.filter(id=>id!==n.id);data.nodes=data.nodes.filter(v=>v.id!==n.id);selected=null;},'已删除节点，可撤销。');}
+$('delete').onclick=deleteNode;
+document.addEventListener('keydown',e=>{if(/^(INPUT|SELECT|TEXTAREA)$/.test(e.target.tagName)||e.target.isContentEditable)return;if(e.code==='Space'){spaceDown=true;e.preventDefault();}if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='z'){e.preventDefault();history(!e.shiftKey);return;}if(e.key==='Escape'){setMode('select');return;}if(e.key==='Delete'){e.preventDefault();deleteNode();return;}const steps={ArrowLeft:[-1,0],ArrowRight:[1,0],ArrowUp:[0,-1],ArrowDown:[0,1]};if(steps[e.key]&&current()){e.preventDefault();const [dx,dy]=steps[e.key],step=e.shiftKey?10:1;transact(()=>Object.assign(current(),clampPoint({x:current().x+dx*step,y:current().y+dy*step}),{review:'adjusted'}));}});
+document.addEventListener('keyup',e=>{if(e.code==='Space')spaceDown=false;});window.addEventListener('blur',()=>{spaceDown=false;endGesture();});
+function readFile(file){return new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=()=>reject(Error('文件读取失败。'));r.readAsDataURL(file);});}
+function imageSize(src){return new Promise((resolve,reject)=>{const im=new Image();im.onload=()=>resolve({width:im.naturalWidth,height:im.naturalHeight});im.onerror=()=>reject(Error('图片无法解码。'));im.src=src;});}
+async function checkImage(d){if(!d.image)return;const size=await imageSize(d.image.src);if(size.width!==d.image.width||size.height!==d.image.height)throw Error('内嵌图片实际尺寸与声明尺寸不一致，无法保证节点对齐。');}
+$('openImage').onclick=()=>$('imageFile').click();$('import').onclick=()=>$('jsonFile').click();
+$('imageFile').onchange=async e=>{const file=e.target.files[0];e.target.value='';if(!file)return;if(data.image&&!window.confirm('打开新图片会清空当前节点。请先导出需要保留的结果。继续？'))return;try{const src=await readFile(file);if(!/^data:image\/(png|jpeg|webp|gif|bmp|avif);base64,/i.test(src))throw Error('请选择支持的位图格式。');const size=await imageSize(src);const next=validate({schema_version:1,title:file.name,image:{name:file.name,...size,src},nodes:[],parts:[]});transact(()=>{data=next;selected=null;},'图片已载入，请添加节点或导入 AI 标注。');setMode('select');fit();}catch(e){report(e);}};
+$('jsonFile').onchange=async e=>{const file=e.target.files[0];e.target.value='';if(!file)return;try{const raw=JSON.parse(await file.text());if(raw.image&&!raw.image.src){if(!data.image||raw.image.width!==data.image.width||raw.image.height!==data.image.height||raw.image.name!==data.image.name)throw Error('JSON 未含原图；请先打开同名且尺寸一致的图片。');raw.image.src=data.image.src;}const next=validate(raw);await checkImage(next);if(checkpointConfig){if(next.image.src!==data.image.src||(next.workflow&&next.workflow.run_id!==checkpointConfig.run_id))throw Error('导入文件的图片或任务与本次审阅不同。');next.workflow=clone(data.workflow);}if(dirty&&!window.confirm('导入将替换当前标注，可在导入后撤销。继续？'))return;transact(()=>{data=next;selected=data.nodes[0]?.id||null;},'已导入标注及部件规划。');setMode('select');fit();}catch(e){report(e);}};
+function download(content,type,name){const a=document.createElement('a'),url=URL.createObjectURL(new Blob([content],{type}));a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),10000);}
+function filename(ext){return (String(data.title||'character-rig').replace(/[<>:"/\\|?*\x00-\x1f]/g,'_').slice(0,80)||'character-rig')+ext;}
+function exported(){const d=validate(data);d.updated_at=new Date().toISOString();return d;}
+$('export').onclick=()=>{try{download(JSON.stringify(exported(),null,2),'application/json',filename('.json'));dirty=false;status('已导出 JSON（含原图），可供下一阶段使用。');}catch(e){report(e);}};
+$('savePage').onclick=()=>{try{const d=exported(),copy=document.documentElement.cloneNode(true);copy.querySelector('#rig-data').textContent=JSON.stringify(d).replace(/</g,'\\u003c');copy.querySelector('#checkpoint-config').textContent='null';copy.querySelector('#canvas').replaceChildren();copy.querySelector('#nodeList').replaceChildren();copy.querySelector('#jsonFile').removeAttribute('value');copy.querySelector('#imageFile').removeAttribute('value');download('<!doctype html>\n'+copy.outerHTML,'text/html',filename('.html'));dirty=false;status('已保存独立网页；重新打开可继续调整，但阶段确认需回到本地审阅页。');}catch(e){report(e);}};
+$('confirmStage').onclick=async()=>{if(!checkpointConfig||syncPending||syncError||gesture)return;const version=editVersion,previous=snapshot(),approved=clone(data);for(const n of approved.nodes)n.review='confirmed';try{await checkImage(approved);await queueRequest('/api/confirm',approved);if(version===editVersion){undoStack.push(previous);redoStack=[];data=approved;dirty=false;render();status('已生成 confirmed.json，流程可读取本次确认结果。');}}catch(e){report(e);}};
+window.addEventListener('beforeunload',e=>{if(dirty){e.preventDefault();e.returnValue='';}});
+new ResizeObserver(()=>{const r=viewport.getBoundingClientRect();if(fitView&&data.image)fit();else{if(lastViewportSize){pan.x+=(r.width-lastViewportSize.width)/2;pan.y+=(r.height-lastViewportSize.height)/2;}renderCanvas();}lastViewportSize={width:r.width,height:r.height};}).observe(viewport);
+render();checkImage(data).then(()=>{if(data.image){selected=data.nodes[0]?.id||null;render();requestAnimationFrame(fit);}}).catch(e=>{report(e);$('projectNote').hidden=false;$('projectNote').textContent=e.message;});
+})();
+</script>
+</body>
+</html>

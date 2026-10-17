@@ -1,0 +1,23 @@
+{
+  "example_id": "dafeiyu-idle-run-v1",
+  "title": "大肥鱼 · Idle / Run 与起停参考",
+  "source": {
+    "run_id": "1c30850ee4ca4af8d324739136eb9838",
+    "revision": 70,
+    "design_sha256": "63057e40d39a74c3dbbf823a5f0f6b0270cb90b22e9cf02d263246b5a34add19",
+    "status": "confirmed",
+    "confirmed_at": "2026-10-17T07:25:05.440780+00:00"
+  },
+  "stop_arm_fraction": 0.3333333333333333,
+  "files": {
+    "index.html": {
+      "bytes": 8785431,
+      "sha256": "d5c2738546961d8531993147bd31e5f65f7a705883f45365e5f1d692f6d81d1c"
+    },
+    "motion.json": {
+      "bytes": 1644665,
+      "sha256": "90f24b67b28da82e832d66066bd30030f65f4770ea4af7f9f762eba7ff152f27"
+    }
+  },
+  "notes": "Frozen approved example. No checkpoint configuration, review token, service port or live project dependency is included. Upstream project path in the offline player is a portable provenance label."
+}
