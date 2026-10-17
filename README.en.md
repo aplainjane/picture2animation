@@ -4,92 +4,94 @@
 
 # picture2animation
 
-**Give an illustration its first steps.**
+**Turn a character illustration into an editable 2D animation.**
 
-Let AI make a first pass. Move the joints, fix the edges, and make the character yours.
+AI prepares the cutouts, repairs, and animation. Review and edit each step in your browser.
 
 [中文](README.md) · **English**
 
-[See the process](#how-dafeiyu-started-running) · [Get started](#get-started) · [Skill entry](character-rig-design/SKILL.md) · [Motion example](character-rig-design/references/dafeiyu-motion-example.md)
+[Workflow](#workflow) · [Quick start](#quick-start) · [Skill docs](character-rig-design/SKILL.md) · [Motion example](character-rig-design/references/dafeiyu-motion-example.md)
 
 <img src="docs/media/dafeiyu-idle-run.gif" width="480" alt="Dafeiyu in the actual cutout player: idle, start running, run, stop, and return to idle">
 
-*Dafeiyu goes for a little run. Captured from the actual cutout player, including both transitions.*
+*Featuring Dafeiyu. Idle, start, run, and stop, recorded from the actual player.*
 
 </div>
 
-picture2animation is a staged AI skill for building editable 2D cutout characters from a single illustration. Work through skeleton layout, part separation, material repair, binding, and animation with a browser review page at every step.
+picture2animation is a character animation skill with six stage guides, browser editing tools, and a complete example. Give your AI a character illustration and work through skeleton placement, cutouts, repairs, binding, and animation. Review each stage in the browser before moving on.
 
-Move a shoulder. Give a few sleeve pixels back to the arm. Fix a repair that changed the face too much. Once the character is running, you can still change the draw order or touch up a texture in the final player. Each stage keeps its own page and data, so there is a way back.
+You can drag a cutout boundary, move misplaced pixels to another layer, or touch up a repair by hand. The final animation page supports draw-order changes and texture editing while you preview the result. Each stage keeps its page and data for later review or revision.
 
-## How Dafeiyu started running
+## Workflow
 
 ![The real workflow: source illustration, skeleton markers, colored parts, and the final run pose](docs/media/journey.jpg)
 
-These are screenshots from the actual example. All six browser templates, their generators, and stage instructions are included. Reuse the tools for another character and prepare data for that character.
+The screenshots below follow Dafeiyu through the actual workflow. Along the way, the arms and legs swung on the same side, a face repair rounded off the chin, and the stop animation raised the hands too high. Those fixes helped shape the editing tools included here.
 
-### 01 · Find the joints first
+All six browser templates, their generators, and stage guides are included. For a new character, reuse the tools and have your AI prepare that character's data.
 
-Place the head, neck, chest, shoulders, elbows, wrists, hips, knees, and ankles over the source image, then add anchors for hair and accessories. Hidden joints start as estimates you can drag into place. Names and parent relationships are editable too.
+### 01 Skeleton placement
+
+AI marks the head, neck, chest, shoulders, elbows, wrists, hips, knees, and ankles on the source image, then adds anchors for hair and accessories. Drag the points to correct its estimates, including joints hidden under clothing. Node names and parent relationships are editable too.
 
 ![Stage 01: skeleton placement on the original image, with a shoulder selected](docs/media/01-skeleton.png)
 
-### 02 · Decide which pixels belong together
+### 02 Part separation
 
-Colors follow each part's actual silhouette; numbers show its draw order. Select two neighboring layers and transfer pixels across their boundary. Eyes, brows, and the mouth become separate parts, with a blank face underneath for expression work.
+Each cutout gets a colored overlay following its silhouette, with numbers showing draw order. Edit the boundaries with your mouse or select two layers to transfer misplaced pixels. Eyes, brows, and the mouth are separate parts, with a blank face underneath for expressions.
 
 ![Stage 02: color-coded silhouettes and numbered layers](docs/media/02-separation.png)
 
 <details>
-<summary>A closer look at the blank face and separate expressions</summary>
+<summary>Face and expression cutouts</summary>
 
 ![Separate face and expression previews, with the facial boundaries enlarged](docs/media/02-expressions.png)
 
 </details>
 
-### 03 · See what needs fixing before fixing it
+### 03 Repair plan
 
-Lay out every part. Decide which gaps need filling, which edges need cleaning, and where local SVG work makes sense. AI proposes a plan; you can select, deselect, and leave notes for each part. This stage approves the plan.
+Inspect each part on its own for missing areas, stray pixels, and rough edges. AI suggests completion, cleanup, or local SVG redraws. Select or deselect those suggestions and leave notes for individual parts. Repairs begin after you approve the plan.
 
 ![Stage 03: an isolated-part gallery with completion, SVG, and cleanup checkboxes](docs/media/03-repair-plan.png)
 
-### 04 · Fill the gaps, keep the character
+### 04 Material repair
 
-Compare the before and after. Check new pixels, colors, and silhouettes. Dafeiyu's face went through several revisions here to keep the original chin and shading. A color picker, brush, and eraser let you make small fixes yourself and carry those changes forward.
+Compare the repaired parts against the originals for changes in silhouette, color, and filled areas. Dafeiyu needed another pass here: AI had rounded the chin and lost some of the original shading. A color picker, brush, and eraser let you fix small details yourself. Saved edits carry forward to the next stages.
 
 ![Stage 04: before-and-after comparisons of repaired transparent parts](docs/media/04-material-repair.png)
 
 <details>
-<summary>Make a small fix with the pixel tools</summary>
+<summary>Pixel editing tools</summary>
 
 ![An enlarged blank face with color picker, brush, and eraser controls](docs/media/04-pixel-tools.png)
 
 </details>
 
-### 05 · Even a blink deserves a closer look
+### 05 Binding and expressions
 
-Choose the driving node for each part and test small joint rotations. Six eye-guide points define the eyelid region; the upper and lower lids approach each other, then use the corresponding closed-eye texture at full closure. An enlarged preview helps catch stray skin or leftover lash pixels.
+Assign a driving node to each part and test the binding by rotating joints. Six draggable eye-guide points define the moving eyelid region. The lids approach each other, then switch to the corresponding closed-eye texture at full closure. Use the enlarged face preview to check for unwanted skin movement or leftover lash pixels.
 
 ![Stage 05: the six-point eyelid guide and a live eye-opening preview](docs/media/05-eye-rig.png)
 
 <details>
-<summary>See full-body binding and expression previews</summary>
+<summary>Full-body binding preview</summary>
 
 ![Full-body binding, skeleton, and synchronized face preview](docs/media/05-binding.png)
 
 </details>
 
-### 06 · Keep editing after the first run
+### 06 Animation and editing
 
-Try idle, start, run, and stop together. Pause, slow down, and scrub to inspect the arm swing and seams. Adjust draw order, select parts for pixel editing, or open a two-color editor to transfer pixels between two layers. Dafeiyu's final stop uses a small outward arm gesture, tuned down during review.
+Generate idle, start, run, and stop clips, then check loops and transitions in the same page. Pause, slow down, or scrub through the animation. Click a part in the player to adjust draw order or edit pixels, or select two layers for the two-color boundary editor. If a sleeve seam opens up, pause on that frame and fix it there.
 
 ![Stage 06: final animation playback, clips, timeline, and draw-order controls](docs/media/06-animation.png)
 
-**Want to try it?** Download the repository and open the [full interactive Dafeiyu example](character-rig-design/assets/examples/dafeiyu/index.html) in a browser. It embeds its assets and scripts, works offline, and lets you inspect the skeleton, play all four clips, and test live transitions. GitHub displays the HTML source; open the downloaded file locally to use the player.
+**Offline example:** Download the repository and open the [interactive Dafeiyu example](character-rig-design/assets/examples/dafeiyu/index.html) in a browser. It embeds its assets and scripts, works offline, and lets you inspect the skeleton, play all four clips, and test live transitions. GitHub displays the HTML source; download the file and open it locally to use the player.
 
-## Get started
+## Quick start
 
-Use an AI environment that can inspect images, work with local files, and run Python. The browser templates provide the review tools; AI prepares the character's nodes, masks, repairs, and motion data. The review UI and detailed skill instructions are currently in Chinese.
+Use an AI environment that can inspect images, work with local files, and run Python. AI follows the skill to prepare character data and generate review pages; you check and edit the results in your browser. The review UI and detailed skill instructions are currently in Chinese.
 
 ```bash
 git clone https://github.com/aplainjane/picture2animation.git
@@ -114,11 +116,11 @@ Keep my edited textures, draw order, and bindings.
 This time, only adjust the stop animation.
 ```
 
-For repeated use, place `character-rig-design/` in your AI tool's skill directory, or keep invoking its `SKILL.md` by path. Stage documents are loaded as needed; there is no need to load every document and example into context at once.
+You can also place `character-rig-design/` in your AI tool's skill directory for repeated use. The main skill loads the relevant guide for each stage.
 
 **Environment:** Python 3, Pillow, NumPy, SciPy, and a modern browser. The optional SVG-to-PNG helper also uses Node.js, Playwright, and Chromium; see [stage 04](character-rig-design/stages/04-material-result.md).
 
-## What moves from one stage to the next?
+## Stages and outputs
 
 | Stage | What you review | What goes forward |
 | --- | --- | --- |
@@ -137,7 +139,7 @@ Each stage starts with a handoff card covering inputs, browser actions, save and
 
 Downloads and individual “checked” flags do not stand in for stage approval. Your texture edits, guides, layer order, and bindings carry forward.
 
-## Repository and project files
+## Directory structure
 
 ```text
 picture2animation/
@@ -170,19 +172,19 @@ your-character-project/
 
 See [project artifacts and handoff rules](character-rig-design/references/project-artifacts.md) for the commands and file locations. Resume from the latest draft, and use a valid approved snapshot downstream, so manual work does not get replaced by an older export.
 
-## Where it fits
+## Scope and limitations
 
-Use it for editable 2D cutout characters, gentle idle motion, blinks, in-place running, and transitions, with a designer reviewing each step.
+The current workflow supports idle motion, blinks, in-place running, and transitions for 2D cutout characters. Dafeiyu is the complete worked example in this repository. New characters still need their cutouts, bindings, and motion checked at each stage.
 
 The current renderer uses single-bone rigid cutouts and local strip deformation. Large turns, perspective changes, and newly exposed hidden regions need additional art or design work. There is no mesh skinning, IK solver, or Spine project export. New illustrations still need image-specific separation and repair decisions. The motion preset is a starting point to adapt to the character's proportions, rest directions, and requested movement.
 
-## Keep exploring
+## Documentation and feedback
 
 - [Main skill](character-rig-design/SKILL.md): stage routing and shared rules.
 - [Template reuse](character-rig-design/references/template-reuse.md): how another AI can call the existing tools.
 - [Dafeiyu motion example](character-rig-design/references/dafeiyu-motion-example.md): four clips, live transitions, and the small stop gesture.
 - [Motion JSON](character-rig-design/assets/examples/dafeiyu/motion.json): image-free data for studying individual node tracks.
 
-Issues are welcome. A screenshot, a part name, and a timestamp—such as “left elbow seam at 0.2 seconds in run”—make a great starting point.
+[Issues](https://github.com/aplainjane/picture2animation/issues) are welcome. Include a screenshot, the part name, and the point in the animation where things go wrong. “Left elbow seam at 0.2 seconds in run” is much easier to track down than “the running looks off.” Suggestions for better cutout and binding workflows are welcome too.
 
 <sub>Screenshots and animation come from the included Dafeiyu example. The project icon was supplied by the project author. Inclusion of an example does not grant rights to reuse the underlying character or artwork.</sub>
